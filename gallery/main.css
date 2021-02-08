@@ -1,0 +1,57 @@
+       :root {
+                color-scheme: light dark;
+                supported-color-schemes: light dark;
+        }
+
+        body{
+        border: 0;
+        margin: 5;
+	background: #000000;
+	}
+
+	a{
+		color:#FFF;
+		font-family: "Source Sans Pro", sans-serif;
+	}
+
+
+        #text_container{
+                width: 100%;
+                height: 100%;
+		text-align: center;
+		color: #ffffff;
+                font-family: "Source Sans Pro", sans-serif;
+                font-weight: 300;
+                font-size: 1rem;
+                line-height: 1.65;
+        }
+
+        #image_container{
+                width: 100%;
+                height: 100%;
+		text-align: center;
+        }
+
+	.single_image{
+		image-rendering:pixelated;
+		width: 70%;
+		height: 70%;
+		display: inline-block;
+	}
+
+        .imageElement {
+                        max-width: 20%;
+                        margin:2vw 2vw;
+        }
+	.navigation {
+		width:100%;
+		color: #FFFFFF; 
+	}
+        
+	@media (max-width : 450px) {
+		.single_image{
+			width: 80%;
+			height: 100%;
+			display: inline-block;
+                }
+	}

@@ -1,0 +1,159 @@
+<!doctype HTML>
+<html>
+<head>
+	<title>Carsten Bund Art, Image</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Display Single</title>
+<link rel='stylesheet' id='main-css'  href='/gallery/main.css' type='text/css' media='all' />
+
+<script type="text/javascript" src="/gallery/utils.js"></script>
+
+<script type="text/javascript">
+
+
+function add_key(){
+	document.addEventListener('keyup', (e) => {
+		if (e.code === "ArrowLeft")      go_left();
+		else if (e.code === "ArrowRight") go_right();
+	});
+}
+
+
+
+	function show_image(img_url){
+		var img = document.createElement('img');
+		img.src = img_url;
+		img.className = 'single_image';
+		var image_div = document.getElementById('image_container');
+                image_div.appendChild(img);
+	}
+
+	function go_left(){
+		if (img_nr <= 1){
+			new_img_nr = totalImages ;
+		}
+		else{
+			new_img_nr = img_nr -1;
+		}
+		let new_url = window.location.href;
+		new_url = new_url.replace(img_nr.pad(4),new_img_nr.pad(4));
+		window.location = new_url;
+
+	}
+
+	function go_right(){
+		if (img_nr >= totalImages){
+                        new_img_nr = 1 ;
+                }
+                else{
+                        new_img_nr = img_nr +1;
+                }         
+				let new_url = window.location.href;
+                new_url = new_url.replace(img_nr.pad(4),new_img_nr.pad(4));
+                window.location = new_url;
+        }
+
+	function play(){
+		go_right();
+		window.setTimeout(play, 1000);
+	}
+
+	var init_folder = function(){
+		cur_image=totalImages;
+        	show_image(image);
+		img_name = image.substring(image.lastIndexOf('/')+1);
+		img_nr = parseInt(img_name.match(/\d+/g));
+		var text_div = document.getElementById('text_container');
+		if (itext[img_nr-1]){
+			text_div.innerHTML = itext[img_nr-1];
+		}
+		else{
+			text_div.innerHTML = dtext;
+		}
+		document.getElementById("navigation").style.visibility= "visible";
+		add_key();
+	}
+
+var itext ="";
+var image = getUrlParameter('i') ;
+//var totalImages = 291;
+
+	function init(){
+		img_name = image.substring(image.lastIndexOf('/')+1);
+		folder = image.replace(img_name,'');
+		loadJS( folder + 'config.js', init_folder, document.body);
+	}
+	
+</script>
+<style>
+	#navigation {
+                width:100%;
+		position: relative;
+                vertical-align: top;
+		background-color: #444444;
+		visibility: hidden;
+        }
+        .nav_link {
+                font: arial, sans-serif;
+                font-size: 4vw;
+        }
+	a.nav_link  {
+		background:#444444;
+		color:#ffffff;
+		padding:8px 14px;
+		border-radius:5px;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		text-decoration:none;
+		display: inline-block; 
+	}	
+
+        #button_left {
+		display:inline-block;
+		float: left;
+		width: 15%;
+		vertical-align:top;
+		text-align:right;
+        }
+
+        #button_right {
+		display:inline-block;
+		float: right;
+		width: 15%;
+		vertical-align:top;
+        }
+
+</style>
+	
+</head>
+
+<body onLoad="init();">
+	
+<div id="text_container">
+</div>
+	
+<div id="image_container">
+</div>
+<div id="navigation"> 
+	<div id=button_left>
+		<a class="nav_link" href="javascript:go_left();">&lt;</a>	
+	</div>	
+	<div id=button_right>
+		<a class="nav_link" href="javascript:go_right();">&gt;</a>	
+	</div>	
+</div>
+</body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-7673913-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
